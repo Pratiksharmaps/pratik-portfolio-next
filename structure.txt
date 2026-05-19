@@ -1,0 +1,38 @@
+pratik-portfolio/
+├── pages/
+│   ├── index.tsx           ← Home page (Hero, About, Skills, Experience, Projects, Contact)
+│   ├── blog/
+│   │   ├── index.tsx       ← Blog listing
+│   │   └── [slug].tsx      ← Blog post
+│   ├── admin/
+│   │   ├── index.tsx       ← Admin login (/admin)
+│   │   ├── dashboard.tsx   ← Admin dashboard
+│   │   ├── new.tsx         ← Create new post
+│   │   └── edit/[id].tsx   ← Edit post
+│   ├── privacy-policy.tsx
+│   ├── 404.tsx
+│   └── api/
+│       ├── admin/login.ts   ← Auth
+│       ├── admin/logout.ts
+│       ├── blog/save.ts     ← Blog CRUD
+│       ├── blog/toggle.ts
+│       ├── blog/delete.ts
+│       ├── contact.ts       ← Contact form + email
+│       └── sitemap.xml.ts   ← Dynamic sitemap
+├── components/
+│   ├── layout/Navbar.tsx
+│   ├── layout/Footer.tsx
+│   ├── sections/Hero.tsx
+│   ├── sections/Skills.tsx
+│   ├── sections/Experience.tsx
+│   ├── sections/Projects.tsx
+│   ├── sections/Contact.tsx
+│   └── ui/ThemeToggle.tsx, SEOHead.tsx
+├── data/
+│   ├── portfolio.ts        ← ⭐ EDIT THIS — all your info is here
+│   └── blogs.json          ← Blog posts stored here (auto-managed)
+├── lib/
+│   ├── blog.ts             ← Blog utilities
+│   ├── auth.ts             ← Auth utilities
+│   └── seo.ts              ← Schema/structured data
+└── styles/globals.css
