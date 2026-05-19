@@ -169,7 +169,7 @@ export default function Hero() {
           </div>
           
           {/* Avatar Image */}
-          <div className="lg:col-span-5 xl:col-span-4 order-1 lg:order-2 flex justify-center lg:justify-end mb-8 lg:mb-0">
+          <div className="lg:col-span-5 xl:col-span-4 order-1 lg:order-2 flex justify-center lg:justify-end mb-8 lg:mb-0 lg:-mt-12 xl:-mt-16">
             <div 
               className="relative w-56 h-56 sm:w-72 sm:h-72 lg:w-80 lg:h-80 rounded-full p-1.5 transition-transform hover:scale-105 duration-500"
               style={{
