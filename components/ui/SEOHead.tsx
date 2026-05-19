@@ -1,5 +1,6 @@
 // components/ui/SEOHead.tsx
 import Head from 'next/head'
+import Script from 'next/script'
 import { siteConfig } from '@/data/portfolio'
 
 interface SEOHeadProps {
@@ -25,7 +26,8 @@ export default function SEOHead({
   const image = ogImage || `${siteConfig.url}/og-image.png`
 
   return (
-    <Head>
+    <>
+      <Head>
       <title>{fullTitle}</title>
       <meta name="description" content={desc} />
       <meta name="keywords" content={siteConfig.keywords.join(', ')} />
@@ -55,9 +57,12 @@ export default function SEOHead({
       {/* Favicons */}
       <link rel="icon" href="/favicon.ico" />
 
+      </Head>
+
       {/* Structured data */}
       {schema && (
-        <script
+        <Script
+          id="structured-data"
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
         />
@@ -66,8 +71,13 @@ export default function SEOHead({
       {/* Google Analytics */}
       {process.env.NEXT_PUBLIC_GA_ID && (
         <>
-          <script async src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_ID}`} />
-          <script
+          <Script 
+            strategy="afterInteractive" 
+            src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_ID}`} 
+          />
+          <Script
+            id="google-analytics"
+            strategy="afterInteractive"
             dangerouslySetInnerHTML={{
               __html: `
                 window.dataLayer = window.dataLayer || [];
@@ -79,6 +89,6 @@ export default function SEOHead({
           />
         </>
       )}
-    </Head>
+    </>
   )
 }
