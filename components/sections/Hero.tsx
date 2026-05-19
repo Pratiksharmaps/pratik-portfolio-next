@@ -1,5 +1,6 @@
 // components/sections/Hero.tsx
 import { siteConfig, stats } from '@/data/portfolio'
+import Image from 'next/image'
 
 export default function Hero() {
   return (
@@ -27,7 +28,8 @@ export default function Hero() {
       />
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 pt-24 pb-16 w-full">
-        <div className="max-w-3xl">
+        <div className="grid lg:grid-cols-12 gap-8 items-center">
+          <div className="lg:col-span-7 xl:col-span-8 order-2 lg:order-1">
           {/* Tag */}
           <div
             className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-medium mb-6"
@@ -163,6 +165,32 @@ export default function Hero() {
                 </div>
               </div>
             ))}
+          </div>
+          </div>
+          
+          {/* Avatar Image */}
+          <div className="lg:col-span-5 xl:col-span-4 order-1 lg:order-2 flex justify-center lg:justify-end mb-8 lg:mb-0">
+            <div 
+              className="relative w-56 h-56 sm:w-72 sm:h-72 lg:w-80 lg:h-80 rounded-full p-1.5 transition-transform hover:scale-105 duration-500"
+              style={{
+                background: 'linear-gradient(135deg, var(--accent), #A855F7)',
+                boxShadow: '0 0 40px rgba(0, 212, 255, 0.2)',
+              }}
+            >
+              <div 
+                className="w-full h-full rounded-full overflow-hidden border-4" 
+                style={{ borderColor: 'var(--bg-primary, #070710)' }}
+              >
+                <Image
+                  src="/avatar.png"
+                  alt="Pratik Sharma - Avatar"
+                  width={320}
+                  height={320}
+                  className="w-full h-full object-cover grayscale-[20%] hover:grayscale-0 transition-all duration-500"
+                  priority
+                />
+              </div>
+            </div>
           </div>
         </div>
 
