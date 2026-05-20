@@ -56,7 +56,7 @@ export default function Home() {
                   { label: 'Current Role', value: '💼 Software Developer @ Antino Labs' },
                   { label: 'Education', value: '🎓 MCA — GGV Bilaspur (8.01 CGPA)' },
                   { label: 'Specialization', value: '📱 Flutter (Android + iOS)' },
-                  { label: 'Experience', value: '⚡ 1+ year, 6 production apps' },
+                  { label: 'Experience', value: '⚡ 2.7+ years, 6 production apps' },
                   { label: 'Open To', value: '🟢 Full-time & Contract roles' },
                 ].map((fact) => (
                   <div key={fact.label} className="flex items-start gap-3 mb-4 last:mb-0">

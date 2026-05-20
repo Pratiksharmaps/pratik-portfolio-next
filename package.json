@@ -9,9 +9,12 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@opentelemetry/api": "^1.9.1",
     "bcryptjs": "^2.4.3",
     "cookie": "^0.6.0",
     "date-fns": "^3.6.0",
+    "firebase": "^12.13.0",
+    "firebase-admin": "^13.10.0",
     "framer-motion": "^11.3.19",
     "gray-matter": "^4.0.3",
     "jsonwebtoken": "^9.0.2",

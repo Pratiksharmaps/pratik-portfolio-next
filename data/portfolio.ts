@@ -4,7 +4,7 @@ export const siteConfig = {
   name: 'Pratik Sharma',
   title: 'Flutter Developer | Mobile App Engineer',
   description:
-    'Mid-level Flutter Developer with 1+ year building production-grade Android & iOS apps for enterprise, government, and US clients. Specializing in Flutter, Firebase, Clean Architecture, and scalable mobile solutions.',
+    'Mid-level Flutter Developer with 2.7+ years building production-grade Android & iOS apps for enterprise, government, and US clients. Specializing in Flutter, Firebase, Clean Architecture, and scalable mobile solutions.',
   url: process.env.NEXT_PUBLIC_SITE_URL || 'https://yourdomain.com',
   email: 'pratik.sde16@gmail.com',
   phone: '+91-7722929886',
@@ -218,5 +218,5 @@ export const stats = [
   { label: 'Production Apps', value: '6+' },
   { label: 'On-time Delivery', value: '95%' },
   { label: 'End Users Served', value: '10K+' },
-  { label: 'Experience', value: '1+ Yr' },
+  { label: 'Experience', value: '2.7+ Yrs' },
 ]
