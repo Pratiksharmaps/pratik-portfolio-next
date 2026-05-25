@@ -13,6 +13,7 @@ if (!admin.apps.length) {
           clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
           privateKey: serviceAccountKey,
         }),
+        storageBucket: process.env.FIREBASE_STORAGE_BUCKET,
       })
       console.log('Firebase Admin initialized.')
     } else {
@@ -24,3 +25,7 @@ if (!admin.apps.length) {
 }
 
 export const db = admin.apps.length ? admin.firestore() : null
+export const storage =
+  admin.apps.length && process.env.FIREBASE_STORAGE_BUCKET
+    ? admin.storage().bucket()
+    : null

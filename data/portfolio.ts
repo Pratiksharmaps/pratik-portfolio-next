@@ -4,7 +4,7 @@ export const siteConfig = {
   name: 'Pratik Sharma',
   title: 'Flutter Developer | Mobile App Engineer',
   description:
-    'Mid-level Flutter Developer with 2.7+ years building production-grade Android & iOS apps for enterprise, government, and US clients. Specializing in Flutter, Firebase, Clean Architecture, and scalable mobile solutions.',
+    'Flutter Developer with 2.5+ years building production-grade Android & iOS apps for enterprise, government, and US clients. Specializing in Flutter, Firebase, Clean Architecture, Fastlane CI/CD, and Shorebird OTA updates.',
   url: process.env.NEXT_PUBLIC_SITE_URL || 'https://yourdomain.com',
   email: 'pratik.sde16@gmail.com',
   phone: '+91-7722929886',
@@ -22,10 +22,19 @@ export const siteConfig = {
     'Dart',
     'Riverpod',
     'Bloc',
-    'React Native Alternative',
+    'GetX',
     'Flutter Engineer India',
     'Gurgaon Developer',
     'Clean Architecture Flutter',
+    'MVVM Flutter',
+    'Fastlane CI/CD',
+    'Shorebird OTA Updates',
+    'Flutter Firebase Developer',
+    'Play Store App Store Deployment',
+    'Flutter State Management',
+    'Flutter Performance Optimization',
+    'AES Encryption Flutter',
+    'RBAC Flutter',
   ],
 }
 
@@ -42,7 +51,7 @@ export const skills = {
   ],
   backend: [
     { name: 'Node.js', level: 70, icon: '🟢' },
-    { name: 'Express.js', level: 68, icon: '⚙️' },
+    { name: 'Express.js',level: 68, icon: '⚙️' },
     { name: 'AWS EC2', level: 65, icon: '☁️' },
     { name: 'MongoDB', level: 65, icon: '🍃' },
     { name: 'PostgreSQL', level: 62, icon: '🐘' },
@@ -50,7 +59,7 @@ export const skills = {
   ],
   tools: [
     'Git / GitHub', 'Jira', 'Postman', 'Docker',
-    'Jenkins', 'Android Studio', 'VS Code', 'PgAdmin',
+    'Fastlane', 'Shorebird', 'Android Studio', 'VS Code', 'PgAdmin',
     'Firebase Console', 'Play Console', 'App Store Connect',
   ],
 }
@@ -63,10 +72,11 @@ export const experience = [
     location: 'Gurgaon, India',
     type: 'Full-time',
     highlights: [
-      'Led Flutter development across 6+ production apps in a team of 8+ engineers with 95% on-time delivery',
-      'Owned full lifecycle for 4 live apps (Tranzact, Ubuild, White Tiger, Rastafix) serving 10,000+ end users',
-      'Reduced average crash frequency by 60% by implementing structured error boundaries and retry logic',
-      'Established CI/CD pipelines using Jenkins and GitHub Actions, cutting manual release effort by ~40%',
+      'Led development across 6+ production apps serving 10,000+ end users with 95% on-time delivery',
+      'Owned full lifecycle for 4 live apps (Tranzact, Ubuild, White Tiger, Rastafix) — architecture through App Store/Play Store',
+      'Reduced crash frequency by 60% via structured error boundaries and retry logic across shared modules',
+      'Automated Android/iOS build, signing, and store submission with Fastlane, cutting release effort by 40%',
+      'Integrated Shorebird code push for OTA Flutter updates, reducing critical bug-fix delivery time by 70%',
     ],
   },
   {
@@ -197,26 +207,81 @@ export const projects = [
     featured: false,
     color: '#F97316',
   },
+  {
+    id: 'luvia',
+    name: 'Luvia Style',
+    subtitle: 'AI Hairstyle & Wardrobe App',
+    description:
+      'Lifestyle app using ARKit/ARCore to analyze face metrics and generate personalized hairstyle recommendations via streaming AI. Built wardrobe manager for daily outfit pairing and style suggestions.',
+    longDescription:
+      'Luvia Style is a cross-platform AI lifestyle app built from scratch. I integrated ARKit (iOS) and ARCore (Android) for real-time face shape measurement, implemented a streaming API so AI hairstyle results appear instantly, and built a full wardrobe management module. Led a 4-person team through design, development, and App Store + Play Store launch.',
+    tech: ['Flutter', 'FastAPI', 'Supabase', 'ARKit', 'ARCore', 'Streaming API', 'Dart'],
+    period: 'Active',
+    highlights: [
+      'ARKit (iOS) + ARCore (Android) for real-time face shape detection and metrics',
+      'Auto-capture face scanning with live detection feedback',
+      'Streaming API for instant AI results — zero buffering, real-time preview',
+      'Server caching to minimize redundant AI inference calls and reduce latency',
+      'Wardrobe manager: organize items, daily outfit pairs, smart purchase recommendations',
+      'Led 4-person cross-functional team from MVP to App Store + Play Store launch',
+    ],
+    category: 'Consumer',
+    featured: true,
+    color: '#00E5FF',
+  },
+]
+
+export const webProjects = [
+  {
+    id: 'awesome-in',
+    name: 'Awesome.in',
+    subtitle: 'Lifestyle & Deals Platform',
+    description:
+      'Freelance WordPress website for an Indian lifestyle and deals platform. Custom theme development with responsive design and SEO-optimized architecture.',
+    tech: ['WordPress', 'PHP', 'HTML/CSS', 'JavaScript'],
+    link: 'https://awesome.in',
+    category: 'Freelance',
+    color: '#3B82F6',
+    highlights: [
+      'Custom WordPress theme built from scratch',
+      'Responsive design optimized for mobile and desktop',
+      'SEO-friendly architecture and performance tuning',
+    ],
+  },
+  {
+    id: 'cmg-maritime-web',
+    name: 'CMG Maritime',
+    subtitle: 'Maritime Academy Website',
+    description:
+      'Corporate website for CMG Maritime — a maritime training and certification academy. Custom WordPress build with course listings and academy information.',
+    tech: ['WordPress', 'PHP', 'HTML/CSS'],
+    link: 'https://cmgmaritime.com',
+    category: 'Freelance',
+    color: '#0EA5E9',
+    highlights: [
+      'Corporate website for maritime training academy',
+      'Course catalog, enrollment info, and contact pages',
+      'Responsive layout with brand-consistent design',
+    ],
+  },
 ]
 
 export const education = [
   {
     institution: 'Guru Ghasidas Vishwavidyalaya, Bilaspur',
     degree: 'Masters of Computer Application (MCA)',
-    grade: 'CGPA: 8.01 / 10',
     period: 'Jul 2022 – Jun 2024',
   },
   {
     institution: 'Atal Bihari Vajpayee Vishwavidyalaya, Bilaspur',
     degree: 'Bachelors of Computer Application (BCA)',
-    grade: '75%',
     period: 'Jul 2018 – Jun 2021',
   },
 ]
 
 export const stats = [
-  { label: 'Production Apps', value: '6+' },
-  { label: 'On-time Delivery', value: '95%' },
-  { label: 'End Users Served', value: '10K+' },
-  { label: 'Experience', value: '2.7+ Yrs' },
+  { label: 'Production Apps', value: '7+', count: 7, suffix: '+' },
+  { label: 'On-time Delivery', value: '95%', count: 95, suffix: '%' },
+  { label: 'End Users Served', value: '10K+', count: 10, suffix: 'K+' },
+  { label: 'Experience', value: '2.5+ Yrs', count: 2, suffix: '.5+ Yrs' },
 ]

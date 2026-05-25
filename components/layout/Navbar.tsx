@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import ThemeToggle from '@/components/ui/ThemeToggle'
+import { availability } from '@/lib/availability'
 
 const navLinks = [
   { href: '/#about', label: 'About' },
@@ -37,11 +38,25 @@ export default function Navbar() {
       }}
     >
       <nav className="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
-        {/* Logo */}
-        <Link href="/" className="font-display font-bold text-xl tracking-tight" style={{ fontFamily: 'var(--font-display)' }}>
-          <span style={{ color: 'var(--accent)' }}>PS</span>
-          <span style={{ color: 'var(--text-primary)' }}>.</span>
-        </Link>
+        {/* Logo & Availability Status */}
+        <div className="flex items-center gap-3">
+          <Link href="/" className="font-display font-bold text-xl tracking-tight" style={{ fontFamily: 'var(--font-display)' }}>
+            <span style={{ color: 'var(--accent)' }}>PS</span>
+            <span style={{ color: 'var(--text-primary)' }}>.</span>
+          </Link>
+          <span
+            className="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-semibold"
+            style={{
+              background: availability.isAvailable ? 'var(--accent-glow)' : availability.accentBg,
+              border: `1px solid ${availability.isAvailable ? 'var(--border)' : availability.accentBorder}`,
+              color: availability.isAvailable ? 'var(--accent)' : availability.accentColor,
+              fontFamily: 'var(--font-mono)',
+            }}
+          >
+            <span className={`w-1.5 h-1.5 rounded-full bg-current ${availability.isAvailable ? 'animate-pulse' : ''}`} />
+            {availability.navbarBadge}
+          </span>
+        </div>
 
         {/* Desktop nav */}
         <div className="hidden md:flex items-center gap-1">
