@@ -61,10 +61,22 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           ? 'http://ip-api.com/json/?fields=status,city,country,query'
           : `http://ip-api.com/json/${resolvedIp}?fields=status,city,country,query`
 
+        console.log('[Visitor Debug] Raw IPs from headers:', {
+          cfConnectingIp,
+          xRealIp,
+          xForwardedFor,
+          socketAddress: req.socket.remoteAddress,
+        })
+        console.log('[Visitor Debug] Resolved IP:', resolvedIp, '| isLocal:', isLocal)
+        console.log('[Visitor Debug] Lookup URL:', lookupUrl)
+
         const ipRes = await fetch(lookupUrl)
+        const rawText = await ipRes.text()
+        console.log('[Visitor Debug] HTTP Status:', ipRes.status)
+        console.log('[Visitor Debug] Raw Response:', rawText)
+
         if (ipRes.ok) {
-          const ipData = await ipRes.json()
-          console.log('IP lookup result:', JSON.stringify(ipData))
+          const ipData = JSON.parse(rawText)
 
           if (ipData.status === 'success') {
             // For local dev, use the detected public IP from the response
@@ -74,41 +86,35 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             // Build location safely — avoid leading commas when city is missing
             const parts = [ipData.city, ipData.country].filter(Boolean)
             location = parts.length > 0 ? parts.join(', ') : 'Unknown'
+            console.log('[Visitor Debug] Final IP:', resolvedIp, '| Location:', location)
           } else {
-            console.warn('IP lookup returned non-success status:', ipData)
+            console.warn('[Visitor Debug] Non-success status from ip-api:', ipData)
           }
         } else {
-          console.warn('IP lookup HTTP error:', ipRes.status, await ipRes.text())
+          console.warn('[Visitor Debug] HTTP error from ip-api:', ipRes.status, rawText)
         }
       } catch (err) {
-        console.error('IP lookup failed:', err)
+        console.error('[Visitor Debug] IP lookup failed:', err)
       }
 
-      // Increment stats/visitors ONLY for first-time browsers
-      let newCount = 0
-      if (isNewVisitor) {
-        const statsRef = db.collection('stats').doc('visitors')
-        const doc = await statsRef.get()
+      // Increment visit count on EVERY session (counts total visits, not unique visitors)
+      const statsRef = db.collection('stats').doc('visitors')
+      const statsDoc = await statsRef.get()
+      let newCount = 1
 
-        if (!doc.exists) {
-          newCount = 1
-          await statsRef.set({ count: 1 })
-        } else {
-          const data = doc.data()
-          newCount = (data?.count || 0) + 1
-          await statsRef.update({ count: newCount })
-        }
+      if (!statsDoc.exists) {
+        await statsRef.set({ count: 1 })
       } else {
-        // Returning visitor — just fetch the current count without incrementing
-        const doc = await db.collection('stats').doc('visitors').get()
-        newCount = doc.data()?.count || 0
+        newCount = (statsDoc.data()?.count || 0) + 1
+        await statsRef.update({ count: newCount })
       }
 
-      // Save visitor specific data
+      // Save / update visitor data with latest IP and location every session
       if (visitorId) {
         await db.collection('visitors').doc(visitorId).set({
           visitorId,
           lastVisit: new Date().toISOString(),
+          ...(isNewVisitor ? { firstVisit: new Date().toISOString() } : {}),
           userAgent: userAgent || '',
           language: language || '',
           platform: platform || '',
@@ -116,7 +122,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           screenHeight: screenHeight || null,
           ip: resolvedIp || null,
           location: location || null,
-        }, { merge: true }) // Merge true in case they visit again and we just want to update lastVisit
+        }, { merge: true })
       }
 
       return res.status(200).json({ count: newCount })
