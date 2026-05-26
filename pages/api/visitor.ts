@@ -54,18 +54,34 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       let location = 'Unknown'
       try {
         const isLocal = !resolvedIp || resolvedIp === '::1' || resolvedIp === '127.0.0.1' || resolvedIp.startsWith('192.168.') || resolvedIp.startsWith('10.')
-        const url = isLocal ? 'https://ipapi.co/json/' : `https://ipapi.co/${resolvedIp}/json/`
-        
-        const ipRes = await fetch(url)
+
+        // ip-api.com: free, no API key needed, returns city/country reliably
+        // For local IPs, omit the IP param so it auto-detects the server's public IP
+        const lookupUrl = isLocal
+          ? 'http://ip-api.com/json/?fields=status,city,country,query'
+          : `http://ip-api.com/json/${resolvedIp}?fields=status,city,country,query`
+
+        const ipRes = await fetch(lookupUrl)
         if (ipRes.ok) {
           const ipData = await ipRes.json()
-          if (isLocal && ipData.ip) {
-            resolvedIp = ipData.ip
+          console.log('IP lookup result:', JSON.stringify(ipData))
+
+          if (ipData.status === 'success') {
+            // For local dev, use the detected public IP from the response
+            if (isLocal && ipData.query) {
+              resolvedIp = ipData.query
+            }
+            // Build location safely — avoid leading commas when city is missing
+            const parts = [ipData.city, ipData.country].filter(Boolean)
+            location = parts.length > 0 ? parts.join(', ') : 'Unknown'
+          } else {
+            console.warn('IP lookup returned non-success status:', ipData)
           }
-          location = `${ipData.city || ''}, ${ipData.country_name || ''}`.trim()
+        } else {
+          console.warn('IP lookup HTTP error:', ipRes.status, await ipRes.text())
         }
       } catch (err) {
-        console.error('IP lookup failed', err)
+        console.error('IP lookup failed:', err)
       }
 
       // Increment stats/visitors ONLY for first-time browsers
