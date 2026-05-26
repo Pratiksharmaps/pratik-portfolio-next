@@ -37,18 +37,32 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     }
 
     try {
-      // Get IP
-      const forwarded = req.headers['x-forwarded-for'] as string
-      const ip = forwarded ? forwarded.split(',')[0] : req.socket.remoteAddress || ''
+      // Get IP checking Cloudflare, Vercel, and Standard forwarded headers
+      const cfConnectingIp = req.headers['cf-connecting-ip'] as string
+      const xRealIp = req.headers['x-real-ip'] as string
+      const xForwardedFor = req.headers['x-forwarded-for'] as string
       
+      let ip = cfConnectingIp || xRealIp || ''
+      if (!ip && xForwardedFor) {
+        ip = xForwardedFor.split(',')[0].trim()
+      }
+      if (!ip) {
+        ip = req.socket.remoteAddress || ''
+      }
+      
+      let resolvedIp = ip
       let location = 'Unknown'
       try {
-        if (ip && ip !== '::1' && ip !== '127.0.0.1') {
-          const ipRes = await fetch(`https://ipapi.co/${ip}/json/`)
-          if (ipRes.ok) {
-            const ipData = await ipRes.json()
-            location = `${ipData.city || ''}, ${ipData.country_name || ''}`.trim()
+        const isLocal = !resolvedIp || resolvedIp === '::1' || resolvedIp === '127.0.0.1' || resolvedIp.startsWith('192.168.') || resolvedIp.startsWith('10.')
+        const url = isLocal ? 'https://ipapi.co/json/' : `https://ipapi.co/${resolvedIp}/json/`
+        
+        const ipRes = await fetch(url)
+        if (ipRes.ok) {
+          const ipData = await ipRes.json()
+          if (isLocal && ipData.ip) {
+            resolvedIp = ipData.ip
           }
+          location = `${ipData.city || ''}, ${ipData.country_name || ''}`.trim()
         }
       } catch (err) {
         console.error('IP lookup failed', err)
@@ -77,7 +91,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           platform: platform || '',
           screenWidth: screenWidth || null,
           screenHeight: screenHeight || null,
-          ip: ip || null,
+          ip: resolvedIp || null,
           location: location || null,
         }, { merge: true }) // Merge true in case they visit again and we just want to update lastVisit
       }
