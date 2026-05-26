@@ -20,7 +20,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
   // POST to increment and save visitor details
   if (req.method === 'POST') {
-    const { visitorId, userAgent, language, platform, screenWidth, screenHeight } = req.body
+    const { visitorId, isNewVisitor, userAgent, language, platform, screenWidth, screenHeight } = req.body
 
     // Basic count fallback if db is not connected
     if (!db) {
@@ -68,17 +68,24 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         console.error('IP lookup failed', err)
       }
 
-      // Increment stats/visitors
-      const statsRef = db.collection('stats').doc('visitors')
-      const doc = await statsRef.get()
-      let newCount = 1
+      // Increment stats/visitors ONLY for first-time browsers
+      let newCount = 0
+      if (isNewVisitor) {
+        const statsRef = db.collection('stats').doc('visitors')
+        const doc = await statsRef.get()
 
-      if (!doc.exists) {
-        await statsRef.set({ count: 1 })
+        if (!doc.exists) {
+          newCount = 1
+          await statsRef.set({ count: 1 })
+        } else {
+          const data = doc.data()
+          newCount = (data?.count || 0) + 1
+          await statsRef.update({ count: newCount })
+        }
       } else {
-        const data = doc.data()
-        newCount = (data?.count || 0) + 1
-        await statsRef.update({ count: newCount })
+        // Returning visitor — just fetch the current count without incrementing
+        const doc = await db.collection('stats').doc('visitors').get()
+        newCount = doc.data()?.count || 0
       }
 
       // Save visitor specific data
