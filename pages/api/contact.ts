@@ -1,7 +1,7 @@
 // pages/api/contact.ts — Contact form with email notification
 import type { NextApiRequest, NextApiResponse } from 'next'
 import nodemailer from 'nodemailer'
-
+import { db } from '../../lib/firebase-admin'
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== 'POST') return res.status(405).end()
 
@@ -27,6 +27,23 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     })
 
     const timestamp = new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })
+    const now = new Date()
+
+    // Save to Firestore if initialized
+    if (db) {
+      try {
+        await db.collection('contact_messages').add({
+          name,
+          email,
+          company: company || '',
+          message,
+          timestamp: now.toISOString(),
+          readableTime: timestamp,
+        })
+      } catch (fbError) {
+        console.error('Firebase save error:', fbError)
+      }
+    }
 
     await transporter.sendMail({
       from: `"Portfolio Contact" <${process.env.GMAIL_USER}>`,

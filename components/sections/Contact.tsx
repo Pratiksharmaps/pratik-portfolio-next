@@ -1,6 +1,7 @@
 // components/sections/Contact.tsx
 import { useState } from 'react'
 import { siteConfig } from '@/data/portfolio'
+import { availability } from '@/lib/availability'
 
 export default function Contact() {
   const [form, setForm] = useState({ name: '', email: '', company: '', message: '' })
@@ -101,14 +102,22 @@ export default function Contact() {
 
             <div
               className="p-5 rounded-2xl"
-              style={{ background: 'var(--bg-card)', border: '1px solid rgba(0,212,255,0.2)' }}
+              style={{
+                background: 'var(--bg-card)',
+                border: `1px solid ${availability.isAvailable ? 'rgba(0,212,255,0.2)' : availability.accentBorder}`,
+              }}
             >
-              <p className="text-sm font-semibold mb-2" style={{ color: 'var(--accent)', fontFamily: 'var(--font-display)' }}>
-                🟢 Currently Available
+              <p className="text-sm font-semibold mb-2" style={{ color: availability.isAvailable ? 'var(--accent)' : availability.accentColor, fontFamily: 'var(--font-display)' }}>
+                {availability.contactTitle}
               </p>
               <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>
-                Open to full-time Flutter Developer roles (on-site Gurgaon / remote), freelance projects, and consulting engagements.
+                {availability.contactDetail}
               </p>
+              {availability.isAvailable && availability.joiningNotice && (
+                <p className="text-xs mt-3 pt-3 border-t" style={{ color: availability.accentColor, borderColor: 'var(--border)', fontFamily: 'var(--font-mono)' }}>
+                  {availability.joiningNotice}
+                </p>
+              )}
             </div>
           </div>
 

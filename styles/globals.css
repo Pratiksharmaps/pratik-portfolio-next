@@ -20,6 +20,37 @@
   --accent: #0EA5E9;
   --accent-glow: rgba(14,165,233,0.15);
   --grid-color: rgba(0,0,0,0.04);
+
+  /* Project Specific CSS variables (Light Mode) */
+  --color-tranzact: var(--accent);
+  --color-tranzact-glow: var(--accent-glow);
+  --color-tranzact-border: rgba(14, 165, 233, 0.2);
+  --color-tranzact-hover-border: rgba(14, 165, 233, 0.35);
+  --color-tranzact-hover-shadow: rgba(14, 165, 233, 0.12);
+
+  --color-ubuild: #B45309; /* amber-700 */
+  --color-ubuild-glow: rgba(180, 83, 9, 0.08);
+  --color-ubuild-border: rgba(180, 83, 9, 0.2);
+  --color-ubuild-hover-border: rgba(180, 83, 9, 0.35);
+  --color-ubuild-hover-shadow: rgba(180, 83, 9, 0.12);
+
+  --color-zoretime: #047857; /* emerald-700 */
+  --color-zoretime-glow: rgba(4, 120, 87, 0.08);
+  --color-zoretime-border: rgba(4, 120, 87, 0.2);
+  --color-zoretime-hover-border: rgba(4, 120, 87, 0.35);
+  --color-zoretime-hover-shadow: rgba(4, 120, 87, 0.12);
+
+  --color-luvia: #007A8A;
+  --color-luvia-glow: rgba(255, 234, 192, 0.12);
+  --color-luvia-border: rgba(0, 170, 195, 0.25);
+  --color-luvia-hover-border: rgba(0, 170, 195, 0.45);
+  --color-luvia-hover-shadow: rgba(0, 229, 255, 0.12);
+
+  --color-viewer-app: #0EA5E9;
+  --color-viewer-app-glow: rgba(14,165,233,0.08);
+  --color-viewer-app-border: rgba(14,165,233,0.2);
+  --color-viewer-app-hover-border: rgba(14,165,233,0.35);
+  --color-viewer-app-hover-shadow: rgba(14,165,233,0.12);
 }
 
 .dark {
@@ -33,6 +64,75 @@
   --accent: #00D4FF;
   --accent-glow: rgba(0,212,255,0.12);
   --grid-color: rgba(255,255,255,0.03);
+
+  /* Project Specific CSS variables (Dark Mode) */
+  --color-tranzact: var(--accent);
+  --color-tranzact-glow: var(--accent-glow);
+  --color-tranzact-border: rgba(0, 212, 255, 0.2);
+  --color-tranzact-hover-border: rgba(0, 212, 255, 0.35);
+  --color-tranzact-hover-shadow: rgba(0, 212, 255, 0.18);
+
+  --color-ubuild: #F59E0B; /* amber-500 */
+  --color-ubuild-glow: rgba(245, 158, 11, 0.12);
+  --color-ubuild-border: rgba(245, 158, 11, 0.2);
+  --color-ubuild-hover-border: rgba(245, 158, 11, 0.35);
+  --color-ubuild-hover-shadow: rgba(245, 158, 11, 0.18);
+
+  --color-zoretime: #10B981; /* emerald-500 */
+  --color-zoretime-glow: rgba(16, 185, 129, 0.12);
+  --color-zoretime-border: rgba(16, 185, 129, 0.2);
+  --color-zoretime-hover-border: rgba(16, 185, 129, 0.35);
+  --color-zoretime-hover-shadow: rgba(16, 185, 129, 0.18);
+
+  /* Luvia: primary #00E5FF cyan + tertiary #FFEAC0 warm gold */
+  --color-luvia: #00E5FF;
+  --color-luvia-glow: rgba(255, 234, 192, 0.14);
+  --color-luvia-border: rgba(0, 229, 255, 0.25);
+  --color-luvia-hover-border: rgba(0, 229, 255, 0.5);
+  --color-luvia-hover-shadow: rgba(0, 229, 255, 0.22);
+
+  --color-viewer-app: #38BDF8;
+  --color-viewer-app-glow: rgba(56,189,248,0.12);
+  --color-viewer-app-border: rgba(56,189,248,0.25);
+  --color-viewer-app-hover-border: rgba(56,189,248,0.45);
+  --color-viewer-app-hover-shadow: rgba(56,189,248,0.18);
+}
+
+/* Featured Card CSS Custom Variables Mapping */
+.card-tranzact {
+  --proj-color: var(--color-tranzact);
+  --proj-glow: var(--color-tranzact-glow);
+  --proj-border: var(--color-tranzact-border);
+  --proj-hover-border: var(--color-tranzact-hover-border);
+  --proj-hover-shadow: var(--color-tranzact-hover-shadow);
+}
+.card-ubuild {
+  --proj-color: var(--color-ubuild);
+  --proj-glow: var(--color-ubuild-glow);
+  --proj-border: var(--color-ubuild-border);
+  --proj-hover-border: var(--color-ubuild-hover-border);
+  --proj-hover-shadow: var(--color-ubuild-hover-shadow);
+}
+.card-zoretime {
+  --proj-color: var(--color-zoretime);
+  --proj-glow: var(--color-zoretime-glow);
+  --proj-border: var(--color-zoretime-border);
+  --proj-hover-border: var(--color-zoretime-hover-border);
+  --proj-hover-shadow: var(--color-zoretime-hover-shadow);
+}
+.card-luvia {
+  --proj-color: var(--color-luvia);
+  --proj-glow: var(--color-luvia-glow);
+  --proj-border: var(--color-luvia-border);
+  --proj-hover-border: var(--color-luvia-hover-border);
+  --proj-hover-shadow: var(--color-luvia-hover-shadow);
+}
+.card-viewer-app {
+  --proj-color: var(--color-viewer-app);
+  --proj-glow: var(--color-viewer-app-glow);
+  --proj-border: var(--color-viewer-app-border);
+  --proj-hover-border: var(--color-viewer-app-hover-border);
+  --proj-hover-shadow: var(--color-viewer-app-hover-shadow);
 }
 
 * {

@@ -21,7 +21,11 @@ export function generatePersonSchema() {
     knowsAbout: [
       'Flutter', 'Dart', 'Firebase', 'Mobile App Development',
       'Android Development', 'iOS Development', 'REST APIs',
-      'State Management', 'Clean Architecture',
+      'State Management', 'Clean Architecture', 'MVVM', 'Riverpod', 'Bloc',
+      'GetX', 'Fastlane', 'Shorebird', 'OTA Updates', 'CI/CD',
+      'AES Encryption', 'RBAC', 'App Performance Optimization',
+      'Play Store Deployment', 'App Store Connect', 'Firebase Crashlytics',
+      'Node.js', 'AWS EC2', 'SQFlite', 'Hive', 'Google Maps SDK', 'Apple HealthKit',
     ],
     alumniOf: [
       {
