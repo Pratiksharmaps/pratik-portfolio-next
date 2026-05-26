@@ -2,9 +2,17 @@ import * as admin from 'firebase-admin'
 
 if (!admin.apps.length) {
   try {
-    const serviceAccountKey = process.env.FIREBASE_PRIVATE_KEY
-      ? process.env.FIREBASE_PRIVATE_KEY.replace(/\\n/g, '\n')
-      : undefined
+    let serviceAccountKey = process.env.FIREBASE_PRIVATE_KEY
+    if (serviceAccountKey) {
+      serviceAccountKey = serviceAccountKey.trim()
+      if (serviceAccountKey.startsWith('"') && serviceAccountKey.endsWith('"')) {
+        serviceAccountKey = serviceAccountKey.slice(1, -1)
+      }
+      if (serviceAccountKey.startsWith("'") && serviceAccountKey.endsWith("'")) {
+        serviceAccountKey = serviceAccountKey.slice(1, -1)
+      }
+      serviceAccountKey = serviceAccountKey.replace(/\\n/g, '\n')
+    }
 
     if (serviceAccountKey && process.env.FIREBASE_PROJECT_ID && process.env.FIREBASE_CLIENT_EMAIL) {
       admin.initializeApp({
