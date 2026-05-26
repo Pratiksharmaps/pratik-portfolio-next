@@ -4,12 +4,15 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import ThemeToggle from '@/components/ui/ThemeToggle'
 import { availability } from '@/lib/availability'
+import { siteConfig } from '@/data/portfolio'
 
 const navLinks = [
   { href: '/#about', label: 'About' },
   { href: '/#skills', label: 'Skills' },
   { href: '/#experience', label: 'Experience' },
   { href: '/#projects', label: 'Projects' },
+  { href: '/#personal-projects', label: 'Personal Projects' },
+  { href: '/built-with-ai', label: 'Built with AI' },
   { href: '/blog', label: 'Blog' },
   { href: '/#contact', label: 'Contact' },
 ]
@@ -18,6 +21,7 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
   const router = useRouter()
+  const isExternalResume = siteConfig.resumeUrl.startsWith('http')
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20)
@@ -87,8 +91,10 @@ export default function Navbar() {
         <div className="flex items-center gap-3">
           <ThemeToggle />
           <a
-            href="/Pratik_Sharma_Resume.pdf"
-            download
+            href={siteConfig.resumeUrl}
+            target={isExternalResume ? '_blank' : undefined}
+            rel={isExternalResume ? 'noopener noreferrer' : undefined}
+            download={isExternalResume ? undefined : true}
             className="hidden md:flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200"
             style={{
               background: 'var(--accent)',
@@ -140,8 +146,10 @@ export default function Navbar() {
             </Link>
           ))}
           <a
-            href="/Pratik_Sharma_Resume.pdf"
-            download
+            href={siteConfig.resumeUrl}
+            target={isExternalResume ? '_blank' : undefined}
+            rel={isExternalResume ? 'noopener noreferrer' : undefined}
+            download={isExternalResume ? undefined : true}
             className="mt-2 px-4 py-3 rounded-lg text-sm font-medium text-center"
             style={{ background: 'var(--accent)', color: '#000' }}
           >

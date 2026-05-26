@@ -5,7 +5,8 @@ import { projects, webProjects } from '@/data/portfolio'
 
 const tabs = [
   { id: 'flutter', label: 'Flutter & Mobile', icon: '📱', count: projects.length },
-  { id: 'web', label: 'WordPress & Web', icon: '🌐', count: webProjects.length },
+  { id: 'nextjs', label: 'Next.js & AI Web', icon: '⚡', count: webProjects.filter(p => p.tech.includes('Next.js')).length },
+  { id: 'wordpress', label: 'WordPress Websites', icon: '🌐', count: webProjects.filter(p => p.tech.includes('WordPress')).length },
 ]
 
 const categoryColors: Record<string, string> = {
@@ -14,6 +15,7 @@ const categoryColors: Record<string, string> = {
   Government: '#EF4444',
   Internal: '#8B5CF6',
   Personal: '#38BDF8',
+  'Built with AI': '#A855F7',
 }
 
 const techIconMap: Record<string, string> = {
@@ -31,6 +33,11 @@ const techIconMap: Record<string, string> = {
   'AWS EC2': 'https://cdn.simpleicons.org/amazonaws/FF9900',
   WordPress: 'https://cdn.simpleicons.org/wordpress/21759B',
   PHP: 'https://cdn.simpleicons.org/php/777BB4',
+  'Next.js': 'https://cdn.simpleicons.org/nextdotjs/ffffff',
+  React: 'https://cdn.simpleicons.org/react/61DAFB',
+  'Tailwind CSS': 'https://cdn.simpleicons.org/tailwindcss/06B6D4',
+  'Framer Motion': 'https://cdn.simpleicons.org/framer/0055FF',
+  'AI Tools': 'https://cdn.simpleicons.org/openai/00A67E',
 }
 
 const storeLinksMap: Record<string, { play?: string; appstore?: string }> = {
@@ -287,32 +294,52 @@ function WebProjectCard({
           ))}
         </div>
 
-        {/* Visit site button */}
-        <a
-          href={project.link}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex items-center justify-center gap-2 w-full py-2.5 rounded-xl text-sm font-semibold transition-all duration-200 mt-auto"
-          style={{
-            background: project.color + '15',
-            color: project.color,
-            border: `1px solid ${project.color}30`,
-            textDecoration: 'none',
-            fontFamily: 'var(--font-display)',
-          }}
-          onMouseEnter={(e) => (e.currentTarget.style.background = project.color + '28')}
-          onMouseLeave={(e) => (e.currentTarget.style.background = project.color + '15')}
-        >
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            <circle cx="12" cy="12" r="10" />
-            <line x1="2" y1="12" x2="22" y2="12" />
-            <path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z" />
-          </svg>
-          Visit Live Site
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            <path d="M5 12h14M12 5l7 7-7 7" />
-          </svg>
-        </a>
+        {/* Action buttons */}
+        <div className="flex gap-2.5 mt-auto">
+          {(project as any).github && (
+            <a
+              href={(project as any).github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center justify-center gap-1.5 flex-1 py-2.5 rounded-xl text-sm font-semibold transition-all duration-200"
+              style={{
+                background: 'rgba(255,255,255,0.06)',
+                color: 'var(--text-primary)',
+                border: '1px solid var(--border)',
+                textDecoration: 'none',
+                fontFamily: 'var(--font-display)',
+              }}
+              onMouseEnter={(e) => (e.currentTarget.style.background = 'rgba(255,255,255,0.12)')}
+              onMouseLeave={(e) => (e.currentTarget.style.background = 'rgba(255,255,255,0.06)')}
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="https://cdn.simpleicons.org/github/f0f0f0" alt="GitHub" width={14} height={14} />
+              Code
+            </a>
+          )}
+          <a
+            href={project.link}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center justify-center gap-2 flex-1 py-2.5 rounded-xl text-sm font-semibold transition-all duration-200"
+            style={{
+              background: project.color + '15',
+              color: project.color,
+              border: `1px solid ${project.color}30`,
+              textDecoration: 'none',
+              fontFamily: 'var(--font-display)',
+            }}
+            onMouseEnter={(e) => (e.currentTarget.style.background = project.color + '28')}
+            onMouseLeave={(e) => (e.currentTarget.style.background = project.color + '15')}
+          >
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <circle cx="12" cy="12" r="10" />
+              <line x1="2" y1="12" x2="22" y2="12" />
+              <path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z" />
+            </svg>
+            Live Site
+          </a>
+        </div>
       </article>
     </motion.div>
   )
@@ -484,9 +511,48 @@ export default function WorksByStack() {
             </motion.div>
           )}
 
-          {activeTab === 'web' && (
+          {activeTab === 'nextjs' && (
             <motion.div
-              key="web"
+              key="nextjs"
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -12 }}
+              transition={{ duration: 0.3 }}
+            >
+              {/* Next.js & AI info banner */}
+              <div
+                className="flex items-center gap-4 p-4 rounded-2xl mb-6"
+                style={{
+                  background: 'linear-gradient(135deg, rgba(168,85,247,0.08) 0%, rgba(0,212,255,0.08) 100%)',
+                  border: '1px solid rgba(168,85,247,0.2)',
+                }}
+              >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src="https://cdn.simpleicons.org/nextdotjs/ffffff" alt="Next.js" width={36} height={36} />
+                <div>
+                  <p className="font-semibold text-sm" style={{ fontFamily: 'var(--font-display)', color: 'var(--text-primary)' }}>
+                    Next.js &amp; AI-Augmented Web Applications
+                  </p>
+                  <p className="text-xs mt-0.5" style={{ color: 'var(--text-secondary)' }}>
+                    Modern, responsive single-page web applications built using Next.js, Tailwind CSS, and optimized using generative AI tools.
+                  </p>
+                </div>
+              </div>
+
+              {/* Next.js project cards */}
+              <div className="grid sm:grid-cols-2 gap-6">
+                {webProjects
+                  .filter((p) => p.tech.includes('Next.js'))
+                  .map((project, i) => (
+                    <WebProjectCard key={project.id} project={project} index={i} />
+                  ))}
+              </div>
+            </motion.div>
+          )}
+
+          {activeTab === 'wordpress' && (
+            <motion.div
+              key="wordpress"
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -12 }}
@@ -512,11 +578,13 @@ export default function WorksByStack() {
                 </div>
               </div>
 
-              {/* Web project cards */}
+              {/* WordPress project cards */}
               <div className="grid sm:grid-cols-2 gap-6">
-                {webProjects.map((project, i) => (
-                  <WebProjectCard key={project.id} project={project} index={i} />
-                ))}
+                {webProjects
+                  .filter((p) => p.tech.includes('WordPress'))
+                  .map((project, i) => (
+                    <WebProjectCard key={project.id} project={project} index={i} />
+                  ))}
               </div>
             </motion.div>
           )}

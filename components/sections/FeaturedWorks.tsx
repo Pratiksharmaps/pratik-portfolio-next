@@ -147,6 +147,39 @@ const featuredProjects = [
     status: 'Live',
     statusColor: '#10B981',
   },
+  {
+    id: 'viewer-app',
+    name: 'Mac File Viewer & Editor',
+    subtitle: 'macOS Native Document Utility',
+    tagline: 'Fast, native macOS desktop utility to view and edit files without bloat.',
+    description:
+      'A native macOS application built with Flutter Desktop enabling users to open, view, and perform basic edits on PDF, Excel (XLS), and Word (DOC) formats quickly without launching heavy office suites.',
+    color: '#38BDF8',
+    accentGlow: 'rgba(56,189,248,0.15)',
+    icon: 'https://cdn.simpleicons.org/apple/f0f0f0',
+    category: 'macOS Utility · Open Source',
+    metrics: [
+      { label: 'File Formats', value: '4+', desc: 'PDF, XLS, DOC, TXT' },
+      { label: 'Load Time', value: '<0.5s', desc: 'Instant file parsing' },
+      { label: 'Platform', value: 'macOS', desc: 'Native desktop app' },
+    ],
+    highlights: [
+      'Native file system integration for quick document previews',
+      'Supports reading and basic editing of DOC and XLS files',
+      'Integrated PDF rendering engine with custom zoom controls',
+      'Lightweight execution and responsive layout built for macOS desktop',
+    ],
+    tech: ['Flutter', 'Dart', 'macOS Desktop', 'File I/O'],
+    techIcons: [
+      { name: 'Flutter', icon: 'https://cdn.simpleicons.org/flutter/54C5F8' },
+      { name: 'Apple', icon: 'https://cdn.simpleicons.org/apple/9CA3AF' },
+    ],
+    links: {
+      github: 'https://github.com/Pratiksharmaps/viewerApp.git',
+    },
+    status: 'Open Source',
+    statusColor: '#3B82F6',
+  },
 ]
 
 function MetricBadge({ metric }: { metric: { label: string; value: string; desc: string } }) {
@@ -374,6 +407,27 @@ function FeaturedCard({ project, index }: { project: typeof featuredProjects[0];
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src="https://cdn.simpleicons.org/apple/9CA3AF" alt="App Store" width={16} height={16} />
               App Store
+            </a>
+          )}
+          {(project.links as any).github && (
+            <a
+              href={(project.links as any).github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-semibold transition-all duration-200"
+              style={{
+                background: 'rgba(255,255,255,0.06)',
+                color: 'var(--text-primary)',
+                border: '1px solid var(--border)',
+                textDecoration: 'none',
+                fontFamily: 'var(--font-body)',
+              }}
+              onMouseEnter={(e) => (e.currentTarget.style.background = 'rgba(255,255,255,0.12)')}
+              onMouseLeave={(e) => (e.currentTarget.style.background = 'rgba(255,255,255,0.06)')}
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="https://cdn.simpleicons.org/github/f0f0f0" alt="GitHub" width={16} height={16} />
+              GitHub
             </a>
           )}
           {/* Scroll-to-projects link */}

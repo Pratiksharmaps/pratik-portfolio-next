@@ -17,8 +17,8 @@ cp .env.example .env.local
 ```
 Edit `.env.local` and fill in your values (see section below).
 
-### 3. Add your resume PDF
-Place your resume as `public/Pratik_Sharma_Resume.pdf`
+### 3. Add your resume PDF (Optional)
+Place your resume as `public/Pratik_Sharma_Resume.pdf`, OR set `NEXT_PUBLIC_RESUME_URL` in `.env.local` to link to a Google Drive or other online PDF file.
 
 ### 4. Run development server
 ```bash
@@ -47,6 +47,9 @@ NEXT_PUBLIC_GA_ID=G-XXXXXXXXXX
 
 # Your deployed URL (no trailing slash)
 NEXT_PUBLIC_SITE_URL=https://yourdomain.com
+
+# Resume URL (optional - Google Drive share link, or local path fallback)
+NEXT_PUBLIC_RESUME_URL=https://drive.google.com/file/d/your_drive_file_id/view?usp=sharing
 ```
 
 ### Setting up Gmail App Password:
@@ -117,7 +120,7 @@ Edit `data/portfolio.ts` — this is the single source of truth for all your con
 Add `public/avatar.jpg` and update the Hero component to show it.
 
 ### Add your resume
-Place `public/Pratik_Sharma_Resume.pdf` — the download button in the navbar and hero link to this.
+Place `public/Pratik_Sharma_Resume.pdf` (local file), or set `NEXT_PUBLIC_RESUME_URL` in your environment variables to use an external link (like Google Drive). The download/view buttons in the navbar and hero section will dynamically link to it.
 
 ### Update robots.txt
 Change `yourdomain.com` in `public/robots.txt` to your actual domain.

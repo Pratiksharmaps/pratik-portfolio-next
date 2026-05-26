@@ -28,6 +28,104 @@ const storeLinks: Record<string, { play?: string; appstore?: string; github?: st
 // All personal projects from personal_projects_section.dart
 const personalProjects = [
   {
+    id: 'splitease',
+    name: 'SplitEase',
+    subtitle: 'Group Expense Sharing Platform',
+    description: 'A comprehensive expense sharing mobile application built with Flutter, integrated with a robust Node.js and Express backend.',
+    highlights: [
+      'Split bills and track group expenses in real-time',
+      'Clean MVVM architecture with secure state management',
+      'Node.js / Express backend repository: splitEase_backend',
+    ],
+    tech: ['Flutter', 'Dart', 'Node.js', 'Express.js', 'REST APIs'],
+    period: 'Personal Project',
+    category: 'Personal',
+    color: '#10B981',
+    github: 'https://github.com/Pratiksharmaps/SplitEase_flutter',
+  },
+  {
+    id: 'ai-astrology',
+    name: 'AI Astrology App',
+    subtitle: 'Personalized Readings & Horoscope',
+    description: 'An AI-powered astrology and horoscope application using Flutter and a FastAPI backend.',
+    highlights: [
+      'Currently under active development',
+      'Personalized charts and astrological calculations',
+      'Built using Cursor AI editor with FastAPI server backend',
+    ],
+    tech: ['Flutter', 'Dart', 'FastAPI', 'AI Tools'],
+    period: 'Under Development',
+    category: 'Personal',
+    color: '#8B5CF6',
+  },
+  {
+    id: 'linkedin-extractor',
+    name: 'AI LinkedIn Extractor',
+    subtitle: 'Screenshot to Job Sheet Pipeline',
+    description: 'An AI-powered Python tool that processes LinkedIn screenshots using local LLMs to extract job details and populate tracking sheets automatically.',
+    highlights: [
+      'Local LLaVA vision model via Ollama for privacy',
+      'Extracts Role, Company, URL, and description',
+      'Prevents forgetting to apply to screenshotted jobs',
+    ],
+    tech: ['Python', 'Ollama', 'LLaVA LLM', 'AI Tools'],
+    period: 'Personal Project',
+    category: 'Personal',
+    color: '#F59E0B',
+    github: 'https://github.com/Pratiksharmaps/LinkedIn_job_extracter',
+  },
+  {
+    id: 'relax-stay',
+    name: 'Relax Stay',
+    subtitle: 'Hotel Presentation Website',
+    description: 'A hotel presentation and booking website built in Next.js using AI design tools to craft a modern glassmorphic look.',
+    highlights: [
+      'Clean room presentations and details layout',
+      'Modern aesthetics designed using AI prompts',
+      'Optimized loading times and responsive grid layout',
+    ],
+    tech: ['Next.js', 'React', 'Tailwind CSS', 'AI Tools'],
+    period: 'Personal Project',
+    category: 'Built with AI',
+    color: '#F59E0B',
+    github: 'https://github.com/Pratiksharmaps/relax-stay',
+    link: 'https://relax-stay.vercel.app',
+  },
+  {
+    id: 'glide-scape',
+    name: 'Glide Scape',
+    subtitle: 'Client Portfolio & Biography',
+    description: 'A premium biographical presentation and portfolio website built for a client using Next.js and smooth Framer Motion animations.',
+    highlights: [
+      'Interactive Framer Motion page transitions',
+      'Bespoke layout showcasing client biography and work',
+      'Fully responsive UI with performance optimization',
+    ],
+    tech: ['Next.js', 'React', 'Tailwind CSS', 'Framer Motion', 'AI Tools'],
+    period: 'Client Project',
+    category: 'Built with AI',
+    color: '#A855F7',
+    github: 'https://github.com/Pratiksharmaps/GlideScape.git',
+    link: 'https://glide-scape.vercel.app/',
+  },
+  {
+    id: 'portfolio-v2',
+    name: 'AI-Augmented Portfolio',
+    subtitle: 'My Personal Website',
+    description: 'My professional portfolio website built in Next.js and styled with custom CSS, built cooperatively with advanced agentic AI coding assistants.',
+    highlights: [
+      'Next.js SSR & ISR architecture',
+      'Responsive design system',
+      '100% built and iterated using Cursor & ChatGPT',
+    ],
+    tech: ['Next.js', 'React', 'Tailwind CSS', 'Framer Motion', 'AI Tools'],
+    period: 'Active',
+    category: 'Built with AI',
+    color: '#00D4FF',
+    github: 'https://github.com/Pratiksharmaps/pratik-portfolio-next',
+    link: 'https://pratik-portfolio-oevs.vercel.app',
+  },
+  {
     id: 'weather',
     name: 'Weather App',
     subtitle: 'Real-time Weather',
@@ -77,7 +175,7 @@ const techIcons: Record<string, string> = {
   'Bloc/Cubit': 'https://cdn.simpleicons.org/flutter/54C5F8',
   Bloc: 'https://cdn.simpleicons.org/flutter/54C5F8',
   'Node.js': 'https://cdn.simpleicons.org/nodedotjs/339933',
-  'AWS EC2': 'https://cdn.simpleicons.org/amazonwebservices/FF9900',
+  'AWS EC2': 'https://zenn.dev/pyteyon/scraps/c64c1529a2218e',
   'Google Calendar API': 'https://cdn.simpleicons.org/googlecalendar/4285F4',
   'Express.js': 'https://cdn.simpleicons.org/express/9CA3AF',
   'Face Recognition APIs': 'https://cdn.simpleicons.org/opencv/5C3EE8',
@@ -90,6 +188,14 @@ const techIcons: Record<string, string> = {
   ARKit: 'https://cdn.simpleicons.org/apple/9CA3AF',
   ARCore: 'https://cdn.simpleicons.org/android/3DDC84',
   'Streaming API': 'https://cdn.simpleicons.org/fastapi/009688',
+  Python: 'https://cdn.simpleicons.org/python/3776AB',
+  Ollama: 'https://cdn.simpleicons.org/ollama/ffffff',
+  'LLaVA LLM': 'https://cdn.simpleicons.org/openai/412991',
+  'AI Tools': 'https://cdn.simpleicons.org/openai/00A67E',
+  'Next.js': 'https://cdn.simpleicons.org/nextdotjs/ffffff',
+  React: 'https://cdn.simpleicons.org/react/61DAFB',
+  'Tailwind CSS': 'https://cdn.simpleicons.org/tailwindcss/06B6D4',
+  'Framer Motion': 'https://cdn.simpleicons.org/framer/0055FF',
 }
 
 function TechBadge({ tech }: { tech: string }) {
@@ -277,7 +383,7 @@ function PersonalProjectCard({ project }: { project: typeof personalProjects[0] 
 
   return (
     <article
-      className="flex flex-col rounded-2xl overflow-hidden transition-all duration-300"
+      className="flex flex-col rounded-2xl overflow-hidden transition-all duration-300 h-full"
       style={{
         background: 'var(--bg-card)',
         border: `1px solid ${hovered ? project.color + '50' : 'var(--border)'}`,
@@ -301,32 +407,6 @@ function PersonalProjectCard({ project }: { project: typeof personalProjects[0] 
           >
             {project.category}
           </span>
-          {project.github && (
-            <a
-              href={project.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-1.5 text-xs px-2.5 py-1 rounded-lg transition-all duration-200"
-              style={{
-                background: 'rgba(255,255,255,0.06)',
-                color: 'var(--text-muted)',
-                border: '1px solid var(--border)',
-                textDecoration: 'none',
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.background = 'rgba(255,255,255,0.12)'
-                e.currentTarget.style.color = 'var(--text-primary)'
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.background = 'rgba(255,255,255,0.06)'
-                e.currentTarget.style.color = 'var(--text-muted)'
-              }}
-            >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="https://cdn.simpleicons.org/github/f0f0f0" alt="GitHub" width={12} height={12} />
-              GitHub
-            </a>
-          )}
         </div>
         <h3 className="font-bold text-lg mb-1" style={{ fontFamily: 'var(--font-display)', color: 'var(--text-primary)' }}>
           {project.name}
@@ -345,11 +425,62 @@ function PersonalProjectCard({ project }: { project: typeof personalProjects[0] 
             </li>
           ))}
         </ul>
-        <div className="flex flex-wrap gap-1.5">
+        <div className="flex flex-wrap gap-1.5 mb-4">
           {project.tech.map((t) => (
             <TechBadge key={t} tech={t} />
           ))}
         </div>
+
+        {/* Action buttons */}
+        {(project.github || (project as any).link) && (
+          <div className="flex gap-2.5 mt-auto pt-4 border-t" style={{ borderColor: 'var(--border)' }}>
+            {project.github && (
+              <a
+                href={project.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center gap-1.5 flex-1 py-2.5 rounded-xl text-xs font-semibold transition-all duration-200"
+                style={{
+                  background: 'rgba(255,255,255,0.06)',
+                  color: 'var(--text-primary)',
+                  border: '1px solid var(--border)',
+                  textDecoration: 'none',
+                  fontFamily: 'var(--font-display)',
+                }}
+                onMouseEnter={(e) => (e.currentTarget.style.background = 'rgba(255,255,255,0.12)')}
+                onMouseLeave={(e) => (e.currentTarget.style.background = 'rgba(255,255,255,0.06)')}
+              >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src="https://cdn.simpleicons.org/github/f0f0f0" alt="GitHub" width={12} height={12} />
+                Code
+              </a>
+            )}
+            {(project as any).link && (
+              <a
+                href={(project as any).link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center gap-2 flex-1 py-2.5 rounded-xl text-sm font-semibold transition-all duration-200"
+                style={{
+                  background: project.color + '15',
+                  color: project.color,
+                  border: `1px solid ${project.color}30`,
+                  textDecoration: 'none',
+                  fontFamily: 'var(--font-display)',
+                }}
+                onMouseEnter={(e) => (e.currentTarget.style.background = project.color + '28')}
+                onMouseLeave={(e) => (e.currentTarget.style.background = project.color + '15')}
+              >
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <circle cx="12" cy="12" r="10" />
+                  <line x1="2" y1="12" x2="22" y2="12" />
+                  <path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z" />
+                </svg>
+                Live Site
+              </a>
+            )}
+          </div>
+        )}
       </div>
     </article>
   )
@@ -357,7 +488,7 @@ function PersonalProjectCard({ project }: { project: typeof personalProjects[0] 
 
 export default function Projects() {
   const [active, setActive] = useState('All')
-  const [showPersonal, setShowPersonal] = useState(false)
+  const [showPersonal, setShowPersonal] = useState(true)
   const filtered = active === 'All' ? projects : projects.filter((p) => p.category === active)
 
   return (
@@ -423,7 +554,7 @@ export default function Projects() {
         </div>
 
         {/* Personal Projects toggle */}
-        <div className="mt-14">
+        <div id="personal-projects" className="mt-14 pt-8">
           <button
             onClick={() => setShowPersonal(!showPersonal)}
             className="flex items-center gap-3 mb-8 group"
@@ -463,7 +594,7 @@ export default function Projects() {
                 transition={{ duration: 0.4, ease: 'easeInOut' }}
               >
                 <p className="text-sm mb-6" style={{ color: 'var(--text-secondary)' }}>
-                  Open source experiments, side projects, and learning exercises built with Flutter &amp; Dart.
+                  Open source experiments, AI-assisted web platforms, and native utility tools.
                 </p>
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
                   {personalProjects.map((project, i) => (

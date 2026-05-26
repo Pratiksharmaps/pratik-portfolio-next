@@ -45,6 +45,12 @@
   --color-luvia-border: rgba(0, 170, 195, 0.25);
   --color-luvia-hover-border: rgba(0, 170, 195, 0.45);
   --color-luvia-hover-shadow: rgba(0, 229, 255, 0.12);
+
+  --color-viewer-app: #0EA5E9;
+  --color-viewer-app-glow: rgba(14,165,233,0.08);
+  --color-viewer-app-border: rgba(14,165,233,0.2);
+  --color-viewer-app-hover-border: rgba(14,165,233,0.35);
+  --color-viewer-app-hover-shadow: rgba(14,165,233,0.12);
 }
 
 .dark {
@@ -84,6 +90,12 @@
   --color-luvia-border: rgba(0, 229, 255, 0.25);
   --color-luvia-hover-border: rgba(0, 229, 255, 0.5);
   --color-luvia-hover-shadow: rgba(0, 229, 255, 0.22);
+
+  --color-viewer-app: #38BDF8;
+  --color-viewer-app-glow: rgba(56,189,248,0.12);
+  --color-viewer-app-border: rgba(56,189,248,0.25);
+  --color-viewer-app-hover-border: rgba(56,189,248,0.45);
+  --color-viewer-app-hover-shadow: rgba(56,189,248,0.18);
 }
 
 /* Featured Card CSS Custom Variables Mapping */
@@ -114,6 +126,13 @@
   --proj-border: var(--color-luvia-border);
   --proj-hover-border: var(--color-luvia-hover-border);
   --proj-hover-shadow: var(--color-luvia-hover-shadow);
+}
+.card-viewer-app {
+  --proj-color: var(--color-viewer-app);
+  --proj-glow: var(--color-viewer-app-glow);
+  --proj-border: var(--color-viewer-app-border);
+  --proj-hover-border: var(--color-viewer-app-hover-border);
+  --proj-hover-shadow: var(--color-viewer-app-hover-shadow);
 }
 
 * {

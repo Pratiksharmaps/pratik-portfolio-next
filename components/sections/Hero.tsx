@@ -43,6 +43,7 @@ const itemVariants = {
 }
 
 export default function Hero() {
+  const isExternalResume = siteConfig.resumeUrl.startsWith('http')
   return (
     <section
       id="hero"
@@ -119,20 +120,31 @@ export default function Hero() {
               className="text-xl sm:text-2xl font-medium mb-6"
               style={{ color: 'var(--text-secondary)', fontFamily: 'var(--font-display)' }}
             >
-              Flutter Developer &amp; Mobile App Engineer
+              {/* Flutter Developer &amp; Mobile App Engineer */}
+              Software Developer &amp; Flutter App Engineer
             </motion.h2>
 
             {/* Description */}
             <motion.p
               variants={itemVariants}
-              className="text-base sm:text-lg leading-relaxed mb-10 max-w-2xl"
+              className="text-base sm:text-lg leading-relaxed mb-6 max-w-2xl"
               style={{ color: 'var(--text-secondary)' }}
             >
-              Building production-grade Android &amp; iOS apps for enterprise, government, and US-based clients.
-              Specializing in{' '}
-              <span style={{ color: 'var(--accent)' }}>Flutter, Firebase, Clean Architecture</span>,
-              and scalable mobile solutions that reach 10,000+ users.
+              Building production-grade mobile applications and actively developing AI-driven web apps. Specializing in{' '}
+              <span style={{ color: 'var(--accent)' }}>Flutter, Next.js, and AI integrations</span> to build scalable solutions that reach thousands of users.
             </motion.p>
+
+            {/* AI Tools Badge Row */}
+            <motion.div
+              variants={itemVariants}
+              className="flex flex-wrap items-center gap-2.5 mb-10 text-xs font-mono"
+              style={{ color: 'var(--text-muted)' }}
+            >
+              <span className="mr-1">⚡ Daily workflow copilot:</span>
+              <span className="px-2.5 py-1 rounded bg-[#00D4FF]/10 text-[#00D4FF] border border-[#00D4FF]/20 font-semibold">Cursor AI</span>
+              <span className="px-2.5 py-1 rounded bg-[#A855F7]/10 text-[#A855F7] border border-[#A855F7]/20 font-semibold">ChatGPT</span>
+              <span className="px-2.5 py-1 rounded bg-[#EF4444]/10 text-[#EF4444] border border-[#EF4444]/20 font-semibold">Claude 3.5</span>
+            </motion.div>
 
             {/* CTA buttons */}
             <motion.div variants={itemVariants} className="flex flex-wrap gap-3 mb-16">
@@ -175,8 +187,10 @@ export default function Hero() {
                 Get In Touch
               </a>
               <a
-                href="/Pratik_Sharma_Resume.pdf"
-                download
+                href={siteConfig.resumeUrl}
+                target={isExternalResume ? '_blank' : undefined}
+                rel={isExternalResume ? 'noopener noreferrer' : undefined}
+                download={isExternalResume ? undefined : true}
                 className="px-6 py-3 rounded-xl font-semibold text-sm transition-all duration-200 flex items-center gap-2"
                 style={{
                   border: '1px solid var(--border)',

@@ -4,14 +4,14 @@ export const siteConfig = {
   name: 'Pratik Sharma',
   title: 'Flutter Developer | Mobile App Engineer',
   description:
-    'Flutter Developer with 2.5+ years building production-grade Android & iOS apps for enterprise, government, and US clients. Specializing in Flutter, Firebase, Clean Architecture, Fastlane CI/CD, and Shorebird OTA updates.',
+    'Flutter Developer with 2.5+ years building production-grade Android & iOS apps for enterprise, government, and US clients. Specializing in Flutter, Firebase, Clean Architecture, Fastlane CI/CD, and AI-augmented development (utilizing ChatGPT, Cursor, and Claude).',
   url: process.env.NEXT_PUBLIC_SITE_URL || 'https://yourdomain.com',
   email: 'pratik.sde16@gmail.com',
   phone: '+91-7722929886',
   location: 'Gurgaon, Haryana, India',
   linkedin: 'https://www.linkedin.com/in/pratiksharma01',
   github: 'https://github.com/Pratiksharmaps',
-  resumeUrl: '/Pratik_Sharma_Resume.pdf',
+  resumeUrl: process.env.NEXT_PUBLIC_RESUME_URL || '/Pratik_Sharma_Resume.pdf',
   ogImage: '/og-image.png',
   keywords: [
     'Flutter Developer',
@@ -52,7 +52,7 @@ export const skills = {
   backend: [
     { name: 'Node.js', level: 70, icon: '🟢' },
     { name: 'Express.js',level: 68, icon: '⚙️' },
-    { name: 'AWS EC2', level: 65, icon: '☁️' },
+    // { name: 'AWS EC2', level: 65, icon: '☁️' },
     { name: 'MongoDB', level: 65, icon: '🍃' },
     { name: 'PostgreSQL', level: 62, icon: '🐘' },
     { name: 'SQFlite', level: 80, icon: '💾' },
@@ -113,6 +113,28 @@ export const projects = [
     color: '#00D4FF',
   },
   {
+    id: 'luvia',
+    name: 'Luvia Style',
+    subtitle: 'AI Hairstyle & Wardrobe App',
+    description:
+      'Lifestyle app using ARKit/ARCore to analyze face metrics and generate personalized hairstyle recommendations via streaming AI. Built wardrobe manager for daily outfit pairing and style suggestions.',
+    longDescription:
+      'Luvia Style is a cross-platform AI lifestyle app built from scratch. I integrated ARKit (iOS) and ARCore (Android) for real-time face shape measurement, implemented a streaming API so AI hairstyle results appear instantly, and built a full wardrobe management module. Led a 4-person team through design, development, and App Store + Play Store launch.',
+    tech: ['Flutter', 'FastAPI', 'Supabase', 'ARKit', 'ARCore', 'Streaming API', 'Dart'],
+    period: 'Active',
+    highlights: [
+      'ARKit (iOS) + ARCore (Android) for real-time face shape detection and metrics',
+      'Auto-capture face scanning with live detection feedback',
+      'Streaming API for instant AI results — zero buffering, real-time preview',
+      'Server caching to minimize redundant AI inference calls and reduce latency',
+      'Wardrobe manager: organize items, daily outfit pairs, smart purchase recommendations',
+      'Led 4-person cross-functional team from MVP to App Store + Play Store launch',
+    ],
+    category: 'Consumer',
+    featured: true,
+    color: '#00E5FF',
+  },
+  {
     id: 'ubuild',
     name: 'Ubuild',
     subtitle: 'Construction Management App',
@@ -158,11 +180,11 @@ export const projects = [
       'Full-stack productivity tool with AWS backend, Google Calendar/Meet integration, and automated scheduling via dynamic-link onboarding.',
     longDescription:
       'An internal calendar and task management system built with a Flutter frontend and Node.js + Express.js backend deployed on AWS EC2. Integrated Google Calendar API and Meet SDK for automated scheduling.',
-    tech: ['Flutter', 'Node.js', 'AWS EC2', 'Google Calendar API', 'Express.js'],
+    tech: ['Flutter', 'Node.js', 'Google Calendar API', 'Express.js'],
     period: 'Jan 2025 – Mar 2025',
     highlights: [
       'Improved team scheduling efficiency by 45%',
-      'AWS EC2 + Node.js backend with real-time sync',
+      // 'AWS EC2 + Node.js backend with real-time sync',
       'Google Calendar + Meet SDK automated scheduling',
     ],
     category: 'Internal',
@@ -207,28 +229,7 @@ export const projects = [
     featured: false,
     color: '#F97316',
   },
-  {
-    id: 'luvia',
-    name: 'Luvia Style',
-    subtitle: 'AI Hairstyle & Wardrobe App',
-    description:
-      'Lifestyle app using ARKit/ARCore to analyze face metrics and generate personalized hairstyle recommendations via streaming AI. Built wardrobe manager for daily outfit pairing and style suggestions.',
-    longDescription:
-      'Luvia Style is a cross-platform AI lifestyle app built from scratch. I integrated ARKit (iOS) and ARCore (Android) for real-time face shape measurement, implemented a streaming API so AI hairstyle results appear instantly, and built a full wardrobe management module. Led a 4-person team through design, development, and App Store + Play Store launch.',
-    tech: ['Flutter', 'FastAPI', 'Supabase', 'ARKit', 'ARCore', 'Streaming API', 'Dart'],
-    period: 'Active',
-    highlights: [
-      'ARKit (iOS) + ARCore (Android) for real-time face shape detection and metrics',
-      'Auto-capture face scanning with live detection feedback',
-      'Streaming API for instant AI results — zero buffering, real-time preview',
-      'Server caching to minimize redundant AI inference calls and reduce latency',
-      'Wardrobe manager: organize items, daily outfit pairs, smart purchase recommendations',
-      'Led 4-person cross-functional team from MVP to App Store + Play Store launch',
-    ],
-    category: 'Consumer',
-    featured: true,
-    color: '#00E5FF',
-  },
+  
 ]
 
 export const webProjects = [
@@ -239,7 +240,7 @@ export const webProjects = [
     description:
       'Freelance WordPress website for an Indian lifestyle and deals platform. Custom theme development with responsive design and SEO-optimized architecture.',
     tech: ['WordPress', 'PHP', 'HTML/CSS', 'JavaScript'],
-    link: 'https://awesome.in',
+    link: 'https://aweesome.in',
     category: 'Freelance',
     color: '#3B82F6',
     highlights: [
@@ -262,6 +263,40 @@ export const webProjects = [
       'Corporate website for maritime training academy',
       'Course catalog, enrollment info, and contact pages',
       'Responsive layout with brand-consistent design',
+    ],
+  },
+  {
+    id: 'relax-stay',
+    name: 'Relax Stay',
+    subtitle: 'Hotel Presentation Website',
+    description:
+      'A hotel presentation and booking website built in Next.js using AI design tools to craft a modern glassmorphic look.',
+    tech: ['Next.js', 'React', 'Tailwind CSS', 'AI Tools'],
+    link: 'https://relax-stay.vercel.app',
+    github: 'https://github.com/Pratiksharmaps/relax-stay',
+    category: 'Personal',
+    color: '#F59E0B',
+    highlights: [
+      'Clean room presentations and details layout',
+      'Modern aesthetics designed using AI prompts',
+      'Optimized loading times and responsive grid layout',
+    ],
+  },
+  {
+    id: 'glide-scape',
+    name: 'Glide Scape',
+    subtitle: 'Client Portfolio & Biography',
+    description:
+      'A premium biographical presentation and portfolio website built for a client using Next.js and smooth Framer Motion animations.',
+    tech: ['Next.js', 'React', 'Tailwind CSS', 'Framer Motion'],
+    link: 'https://glide-scape.vercel.app/',
+    github: 'https://github.com/Pratiksharmaps/GlideScape.git',
+    category: 'Freelance',
+    color: '#A855F7',
+    highlights: [
+      'Interactive Framer Motion page transitions',
+      'Bespoke layout showcasing client biography and work',
+      'Fully responsive UI with performance optimization',
     ],
   },
 ]

@@ -52,6 +52,9 @@ export default function Home() {
                   <p>
                     When I&apos;m not building apps, I write about Flutter on my blog — state management patterns, Firebase optimizations, and lessons from the production trenches.
                   </p>
+                  <p className="leading-relaxed">
+                    To maintain high execution speeds, I leverage an AI-augmented developer workflow using <span className="px-1.5 py-0.5 rounded bg-[#A855F7]/15 text-[#A855F7] font-semibold font-mono text-xs">ChatGPT</span>, <span className="px-1.5 py-0.5 rounded bg-[#00D4FF]/15 text-[#00D4FF] font-semibold font-mono text-xs">Cursor</span>, and <span className="px-1.5 py-0.5 rounded bg-[#EF4444]/15 text-[#EF4444] font-semibold font-mono text-xs">Claude</span>. I rely on ChatGPT for conceptual learning and Cursor when navigating tight timelines, having logged over <span style={{ color: 'var(--accent)' }} className="font-semibold">30 million tokens</span> in Cursor to supercharge my development pace. I am <span className="border-b border-dashed border-[#00D4FF]/60 text-white font-semibold">actively building AI-driven applications</span> and integrating vision and chat LLM APIs to create smart, next-generation web and mobile platforms.
+                  </p>
                 </div>
               </motion.div>
               <motion.div
@@ -140,8 +143,8 @@ export default function Home() {
         <Skills />
         <Experience />
         <FeaturedWorks />
-        <WorksByStack />
         <Projects />
+        <WorksByStack />
         <MiniGame />
         <Contact />
       </main>
