@@ -3,8 +3,8 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 import { getPublishedPosts } from '@/lib/blog'
 import { siteConfig } from '@/data/portfolio'
 
-export default function handler(req: NextApiRequest, res: NextApiResponse) {
-  const posts = getPublishedPosts()
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+  const posts = await getPublishedPosts()
   const base = siteConfig.url
 
   const staticPages = [

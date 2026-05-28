@@ -1,0 +1,10 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // blogs: anyone can read published posts; only server-side admin writes via Admin SDK
+    match /blogs/{docId} {
+      allow read: if resource.data.published == true;
+      allow write: if false; // all writes go through Admin SDK server-side only
+    }
+  }
+}

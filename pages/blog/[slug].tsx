@@ -1,6 +1,7 @@
 // pages/blog/[slug].tsx
 import { GetStaticProps, GetStaticPaths } from 'next'
 import Link from 'next/link'
+import Image from 'next/image'
 import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
 import SEOHead from '@/components/ui/SEOHead'
@@ -88,6 +89,23 @@ export default function BlogPost({ post, contentHtml }: Props) {
             </div>
           </header>
 
+          {/* Cover image */}
+          {post.coverImage && (
+            <div
+              className="relative w-full rounded-2xl overflow-hidden mb-10"
+              style={{ aspectRatio: '16/7' }}
+            >
+              <Image
+                src={post.coverImage}
+                alt={post.title}
+                fill
+                className="object-cover"
+                priority
+                sizes="(max-width: 768px) 100vw, 768px"
+              />
+            </div>
+          )}
+
           {/* Content */}
           <article
             className="blog-content"
@@ -130,7 +148,7 @@ export default function BlogPost({ post, contentHtml }: Props) {
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const posts = getPublishedPosts()
+  const posts = await getPublishedPosts()
   return {
     paths: posts.map((p) => ({ params: { slug: p.slug } })),
     fallback: 'blocking',
@@ -138,7 +156,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 }
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const post = getPostBySlug(params?.slug as string)
+  const post = await getPostBySlug(params?.slug as string)
   if (!post || !post.published) return { notFound: true }
 
   const processed = await remark().use(remarkHtml).process(post.content)

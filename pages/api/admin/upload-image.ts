@@ -1,29 +1,35 @@
-// pages/api/admin/upload-image.ts — Upload cover image to Firebase Storage (admin only)
+// pages/api/admin/upload-image.ts — Upload cover image to Cloudinary (admin only)
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { isAuthenticated } from '@/lib/auth'
-import { storage } from '@/lib/firebase-admin'
+import { v2 as cloudinary } from 'cloudinary'
 
 // Allow larger payloads for image base64 data
-export const config = { api: { bodyParser: { sizeLimit: '8mb' } } }
+export const config = { api: { bodyParser: { sizeLimit: '10mb' } } }
+
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+})
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== 'POST') return res.status(405).end()
   if (!isAuthenticated(req)) return res.status(401).json({ error: 'Unauthorized' })
 
-  if (!storage) {
+  const missingVars = !process.env.CLOUDINARY_CLOUD_NAME || !process.env.CLOUDINARY_API_KEY || !process.env.CLOUDINARY_API_SECRET
+  if (missingVars) {
     return res.status(503).json({
-      error: 'Firebase Storage not configured. Set FIREBASE_STORAGE_BUCKET in your environment.',
+      error: 'Cloudinary not configured. Add CLOUDINARY_CLOUD_NAME, CLOUDINARY_API_KEY, and CLOUDINARY_API_SECRET to your environment.',
     })
   }
 
-  const { fileName, mimeType, base64Data } = req.body as {
-    fileName?: string
+  const { mimeType, base64Data } = req.body as {
     mimeType?: string
     base64Data?: string
   }
 
-  if (!fileName || !mimeType || !base64Data) {
-    return res.status(400).json({ error: 'Missing fileName, mimeType, or base64Data' })
+  if (!mimeType || !base64Data) {
+    return res.status(400).json({ error: 'Missing mimeType or base64Data' })
   }
 
   const allowed = ['image/jpeg', 'image/png', 'image/webp', 'image/gif']
@@ -32,22 +38,22 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   }
 
   try {
-    const buffer = Buffer.from(base64Data, 'base64')
-    const safeName = fileName.replace(/[^a-zA-Z0-9._-]/g, '_').toLowerCase()
-    const filePath = `blog-images/${Date.now()}-${safeName}`
+    const dataUri = `data:${mimeType};base64,${base64Data}`
 
-    const file = storage.file(filePath)
-    await file.save(buffer, {
-      metadata: { contentType: mimeType },
-      public: true,
-    })
+    // const result = await cloudinary.uploader.upload(dataUri, {
+    //   folder: 'blog-covers',
+    //   resource_type: 'image',
+    //   // Auto quality + format for best performance
+    //   transformation: [{ quality: 'auto', fetch_format: 'auto' }],
+    // })
+    const result = await cloudinary.uploader.upload(dataUri, {
+  folder: 'blog-covers',
+  resource_type: 'image',
+})
 
-    const bucketName = process.env.FIREBASE_STORAGE_BUCKET
-    const downloadURL = `https://storage.googleapis.com/${bucketName}/${filePath}`
-
-    return res.status(200).json({ url: downloadURL })
+    return res.status(200).json({ url: result.secure_url })
   } catch (err) {
-    console.error('Storage upload error:', err)
-    return res.status(500).json({ error: 'Upload failed. Check Firebase Storage rules.' })
+    console.error('Cloudinary upload error:', err)
+    return res.status(500).json({ error: 'Upload failed. Check Cloudinary credentials.' })
   }
 }

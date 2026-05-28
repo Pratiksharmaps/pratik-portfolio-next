@@ -243,6 +243,6 @@ export const getServerSideProps: GetServerSideProps = async ({ req }) => {
   if (!isAuthenticated(req)) {
     return { redirect: { destination: '/admin', permanent: false } }
   }
-  const posts = getAllPosts()
+  const posts = await getAllPosts()
   return { props: { posts } }
 }

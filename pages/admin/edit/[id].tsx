@@ -299,7 +299,7 @@ export default function EditPost({ post }: Props) {
 
 export const getServerSideProps: GetServerSideProps = async ({ req, params }) => {
   if (!isAuthenticated(req)) return { redirect: { destination: '/admin', permanent: false } }
-  const post = getPostById(params?.id as string)
+  const post = await getPostById(params?.id as string)
   if (!post) return { notFound: true }
   return { props: { post } }
 }
